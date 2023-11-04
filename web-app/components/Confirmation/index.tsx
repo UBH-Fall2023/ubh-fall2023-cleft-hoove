@@ -11,20 +11,19 @@ const Confirmation = () => {
     <Stack>
         <Space w="md"/>
       <Flex justify={'center'}p={20} direction={'column'}>
-          <Title fz="lg">Order ID: BLANK</Title>
-          <Title fz="lg">Dropoff: BLANK</Title>
+          <Text fz="lg">Order ID: BLANK</Text>
+          <Text fz="lg">Dropoff: BLANK</Text>
       </Flex>
     </Stack>
     <Flex p={20} justify={"center"} direction={'column'}>
 <Button>Drop Off</Button>
-
       </Flex>
-    
     </Group>
+    <Divider></Divider>
     <Flex justify ={'center'}>
     <Image
     h={500}
-    w={1300}
+    w={830}
       component={NextImage} src={Map} alt="map"
     />
     </Flex>
