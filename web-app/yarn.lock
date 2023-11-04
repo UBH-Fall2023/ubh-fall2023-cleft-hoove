@@ -2703,6 +2703,11 @@
     "@tabler/icons" "2.20.0"
     "prop-types" "^15.7.2"
 
+"@tabler/icons@^2.40.0":
+  "integrity" "sha512-VqKsBSX159cLFTnCzkCmGhZtSPJHNN0lM2sC4xe0HPOfPUnjiex7rDHDdut4oe4iKRecDDpwXwM9BcU6xCPlCg=="
+  "resolved" "https://registry.npmjs.org/@tabler/icons/-/icons-2.40.0.tgz"
+  "version" "2.40.0"
+
 "@tabler/icons@2.20.0":
   "integrity" "sha512-BsUEJoqREs8bqcrf5HfJBq6/rDvsRI3h+T+0X1o7i8LBHonsH0iAngcyL0I82YKoSy9NiVDvM3LV63zDP0nPYQ=="
   "resolved" "https://registry.npmjs.org/@tabler/icons/-/icons-2.20.0.tgz"
@@ -9843,6 +9848,11 @@
   "integrity" "sha512-4kl5w+nCB44EVRdO0g/UGoOp3vlwgycUVtkk/7DPyeLZUCuNFFKCFG6/t/DgHLrUPHjrZg6s5tNm+56Q2B0xyg=="
   "resolved" "https://registry.npmjs.org/tabbable/-/tabbable-6.1.1.tgz"
   "version" "6.1.1"
+
+"tabler-icons@^1.35.0":
+  "integrity" "sha512-8ZbCA3oVQAsVYljvA4UiGRdB01hKqjFcbVTViw5y2Hs2SSpZ/iMB2XYbDZkfB8TqWAXvsho272avD5rYe3wXaw=="
+  "resolved" "https://registry.npmjs.org/tabler-icons/-/tabler-icons-1.35.0.tgz"
+  "version" "1.35.0"
 
 "tapable@^2.0.0", "tapable@^2.1.1", "tapable@^2.2.0", "tapable@^2.2.1":
   "integrity" "sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ=="
