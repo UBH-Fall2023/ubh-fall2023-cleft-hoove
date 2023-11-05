@@ -44,43 +44,42 @@ export default function OrdersPage() {
         <Title>Orders</Title>
       </Flex>
       <Box pt={10}></Box>
+
       {orders &&
         orders.map((order: any) => {
           return (
-            <>
-              <Card shadow="sm">
-                <Group justify="space-between">
-                  <Flex direction={'column'}>
-                    <Group>
-                      <Text c="dimmed">OrderId:</Text>
-                      <Text>{order._id}</Text>
-                    </Group>
-                    <Group>
-                      <Text c="dimmed">Pickup:</Text>
-                      <Text>{order.pickup}</Text>
-                    </Group>
-                    <Group>
-                      <Text c="dimmed">Dropoff:</Text>
-                      <Text>{order.dropoff}</Text>
-                    </Group>
-                  </Flex>
-                  <Flex direction={'column'}>
-                    <Group>
-                      <Text c="dimmed">Status:</Text>
-                      <Text>{getStatus(order.status)}</Text>
-                    </Group>
-                    <Group>
-                      <Text c="dimmed">Amount:</Text>
-                      <Text>${order.price || 10}</Text>
-                    </Group>
-                    <Group>
-                      <Text c="dimmed">CreatedAt:</Text>
-                      <Text>{order.createdAt}</Text>
-                    </Group>
-                  </Flex>
-                </Group>
-              </Card>
-            </>
+            <Card key={order._id} shadow="sm">
+              <Group justify="space-between">
+                <Flex direction={'column'}>
+                  <Group>
+                    <Text c="dimmed">OrderId:</Text>
+                    <Text>{order._id}</Text>
+                  </Group>
+                  <Group>
+                    <Text c="dimmed">Pickup:</Text>
+                    <Text>{order.pickup}</Text>
+                  </Group>
+                  <Group>
+                    <Text c="dimmed">Dropoff:</Text>
+                    <Text>{order.dropoff}</Text>
+                  </Group>
+                </Flex>
+                <Flex direction={'column'}>
+                  <Group>
+                    <Text c="dimmed">Status:</Text>
+                    <Text>{getStatus(order.status)}</Text>
+                  </Group>
+                  <Group>
+                    <Text c="dimmed">Amount:</Text>
+                    <Text>${order.price || 10}</Text>
+                  </Group>
+                  <Group>
+                    <Text c="dimmed">CreatedAt:</Text>
+                    <Text>{order.createdAt}</Text>
+                  </Group>
+                </Flex>
+              </Group>
+            </Card>
           );
         })}
     </Stack>

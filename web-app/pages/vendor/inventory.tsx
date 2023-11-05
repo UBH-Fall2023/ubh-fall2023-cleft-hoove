@@ -5,8 +5,13 @@ import { Flex, Group, Text, Stack } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { IconMapPin } from 'tabler-icons';
 
+interface Vendor {
+  name: string;
+  location: string;
+}
+
 export default function InventoryPage() {
-  const [vendor, setVendor] = useState({});
+  const [vendor, setVendor] = useState<Vendor>();
 
   const fetchLoc = () => {
     fetch(`${Host}/api/v1/vendor/${VendorId}`, {
@@ -24,13 +29,15 @@ export default function InventoryPage() {
   return (
     <Stack>
       <Header title="Food Vendor" />
-      <Group pl={20} pr={20} justify={'space-between'}>
-        <Text fw={700}>{vendor.name}</Text>
-        <Group>
-          <IconMapPin />
-          {vendor && <Text>{vendor.location}</Text>}
+      {vendor && (
+        <Group pl={20} pr={20} justify={'space-between'}>
+          <Text fw={700}>{vendor.name}</Text>
+          <Group>
+            <IconMapPin />
+            {vendor && <Text>{vendor.location}</Text>}
+          </Group>
         </Group>
-      </Group>
+      )}
       <Inventory />
     </Stack>
   );

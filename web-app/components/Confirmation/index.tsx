@@ -17,9 +17,17 @@ import { useEffect, useState } from 'react';
 import { Host } from '@/config';
 import { useRouter } from 'next/router';
 
+interface Order {
+  _id: string;
+  createdAt: string;
+  pickup: string;
+  dropoff: string;
+  price?: number;
+}
+
 const Confirmation = () => {
   const router = useRouter();
-  const [order, setOrder] = useState(null);
+  const [order, setOrder] = useState<Order>();
 
   const fetchOrder = () => {
     fetch(`${Host}/api/v1/order/${router.query.order}`, {

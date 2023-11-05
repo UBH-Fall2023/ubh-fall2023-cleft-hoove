@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 import type { NextPage } from 'next';
 import type { ReactElement, ReactNode } from 'react';
 import Head from 'next/head';
-import { MantineProvider } from '@mantine/core';
+import { Box, MantineProvider } from '@mantine/core';
 import { theme } from '../theme';
 import { ListProvider } from '@/context/FoodCartContext';
 import { Notifications } from '@mantine/notifications';
@@ -20,7 +20,7 @@ export default function App(props: AppProps) {
   const { Component, pageProps } = props;
   return (
     <MantineProvider theme={theme}>
-      <Notifications />
+      <Notifications w={200} position="bottom-left" />
       <ListProvider>
         <Head>
           <title>Mantine Template</title>
@@ -30,8 +30,9 @@ export default function App(props: AppProps) {
           />
           <link rel="shortcut icon" href="/favicon.svg" />
         </Head>
-
-        <Component {...pageProps} />
+        <Box h={700}>
+          <Component {...pageProps} />
+        </Box>
       </ListProvider>
     </MantineProvider>
   );

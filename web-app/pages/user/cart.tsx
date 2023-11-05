@@ -34,21 +34,26 @@ export default function Cart() {
         totalAmount += item.price;
       }
 
+      const body = {
+        userId: UserId?.toString(),
+        pickup: pickup,
+        dropoff: dropOff,
+        items: items,
+        price: totalAmount,
+      };
+      console.log('body ', body);
       return await fetch(`${Host}/api/v1/order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          userId: UserId?.toString(),
-          pickup: pickup,
-          dropOff: dropOff,
-          items: items,
-          price: totalAmount,
-        }),
+        body: JSON.stringify(body),
       })
         .then((res) => res.json())
-        .then((res) => res._id);
+        .then((res) => {
+          console.log('order response ', res);
+          return res._id;
+        });
     };
 
     for (const pickup of m.keys()) {

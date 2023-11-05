@@ -1,18 +1,14 @@
 import { useList } from '@/context/FoodCartContext';
 import { Card, Stack, Group, Text } from '@mantine/core';
 
-interface CartItemListProps {
-  onPay?: any;
-}
-
-const CartItemList = ({ onPay }: CartItemListProps) => {
+const CartItemList = () => {
   const { storageItems } = useList();
-
+  console.log(storageItems);
   return (
     <>
       <Stack p={30}>
         {storageItems.map((item: any) => {
-          return <CartItem {...item} />;
+          return <CartItem key={item._id} {...item} />;
         })}
       </Stack>
     </>

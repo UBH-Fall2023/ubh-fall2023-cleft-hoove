@@ -82,22 +82,6 @@ module.exports = {
 				items: {
 					type: "array",
 					optional: true,
-					items: {
-						type: "object",
-						props: {
-							id: "string",
-							quantity: {
-								type: "number",
-								convert: true,
-								positive: true,
-							},
-							price: {
-								type: "number",
-								convert: true,
-								positive: true,
-							},
-						},
-					},
 				},
 			},
 			async handler(ctx) {
