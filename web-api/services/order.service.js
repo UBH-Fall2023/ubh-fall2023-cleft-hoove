@@ -4,6 +4,7 @@ require("dotenv").config();
 const DbService = require("moleculer-db");
 const MongooseAdapter = require("moleculer-db-adapter-mongoose");
 const { Model, Status } = require("../models/order.model");
+const mongoose = require("mongoose");
 
 /**
  * @typedef {import('moleculer').ServiceSchema} ServiceSchema Moleculer's Service Schema
@@ -100,6 +101,24 @@ module.exports = {
 						pickup: ctx.params.pickup,
 						dropoff: ctx.params.dropoff,
 						items: ctx.params.items,
+					})
+					.then((doc) => this.transformDocuments(ctx, {}, doc));
+			},
+		},
+
+		updateDeliver: {
+			params: {
+				id: "string",
+				deliverId: "string",
+			},
+			async handler(ctx) {
+				return this.adapter
+					.findOne({
+						_id: mongoose.Types.ObjectId(ctx.params.id),
+					})
+					.then((doc) => {
+						doc.deliverId = ctx.params.deliverId;
+						return this.adapter.updateById(doc._id, doc);
 					})
 					.then((doc) => this.transformDocuments(ctx, {}, doc));
 			},
