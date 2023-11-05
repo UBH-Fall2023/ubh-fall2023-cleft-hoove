@@ -24,6 +24,9 @@ let OrderSchema = new Schema(
 		items: {
 			type: JSON,
 		},
+		price: {
+			type: Number,
+		},
 		deliverId: {
 			type: String,
 			index: true,

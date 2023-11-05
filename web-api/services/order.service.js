@@ -74,8 +74,14 @@ module.exports = {
 				userId: "string",
 				pickup: "string",
 				dropoff: "string",
+				price: {
+					type: "number",
+					convert: true,
+					positive: true,
+				},
 				items: {
 					type: "array",
+					optional: true,
 					items: {
 						type: "object",
 						props: {
@@ -101,12 +107,42 @@ module.exports = {
 						pickup: ctx.params.pickup,
 						dropoff: ctx.params.dropoff,
 						items: ctx.params.items,
+						price: ctx.params.price,
 					})
 					.then((doc) => this.transformDocuments(ctx, {}, doc));
 			},
 		},
 
+		getDeliverOrders: {
+			rest: {
+				path: "/deliver",
+				method: "GET",
+			},
+			params: {
+				deliverId: "string",
+			},
+			async handler(ctx) {
+				const deliver = await ctx.call("v1.user.get", {
+					id: ctx.params.deliverId,
+				});
+				console.log("deliver ", deliver);
+				return this.adapter
+					.find({
+						query: {
+							status: Status.Created,
+							dropoff: deliver.location,
+						},
+						sort: ["-createdAt"],
+					})
+					.then((docs) => this.transformDocuments(ctx, {}, docs));
+			},
+		},
+
 		updateDeliver: {
+			rest: {
+				path: "/deliver",
+				method: "PUT",
+			},
 			params: {
 				id: "string",
 				deliverId: "string",
@@ -118,6 +154,48 @@ module.exports = {
 					})
 					.then((doc) => {
 						doc.deliverId = ctx.params.deliverId;
+						return this.adapter.updateById(doc._id, doc);
+					})
+					.then((doc) => this.transformDocuments(ctx, {}, doc));
+			},
+		},
+
+		pickupOrder: {
+			rest: {
+				path: "/pickup",
+				method: "PUT",
+			},
+			params: {
+				id: "string",
+			},
+			async handler(ctx) {
+				return this.adapter
+					.findOne({
+						_id: mongoose.Types.ObjectId(ctx.params.id),
+					})
+					.then((doc) => {
+						doc.status = Status.OnTheWay;
+						return this.adapter.updateById(doc._id, doc);
+					})
+					.then((doc) => this.transformDocuments(ctx, {}, doc));
+			},
+		},
+
+		completeOrder: {
+			rest: {
+				path: "/complete",
+				method: "PUT",
+			},
+			params: {
+				id: "string",
+			},
+			async handler(ctx) {
+				return this.adapter
+					.findOne({
+						_id: mongoose.Types.ObjectId(ctx.params.id),
+					})
+					.then((doc) => {
+						doc.status = Status.Completed;
 						return this.adapter.updateById(doc._id, doc);
 					})
 					.then((doc) => this.transformDocuments(ctx, {}, doc));
