@@ -10,6 +10,8 @@ jobs:
         with:
           ref: main
           path: ./web-app
+          fetch-depth: 1 # Use a shallow clone to speed up the checkout
+          submodules: "none" # Disable fetching submodules
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
