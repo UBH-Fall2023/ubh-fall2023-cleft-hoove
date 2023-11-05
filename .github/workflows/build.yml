@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: master
-          path: ./web-app
+          path: ./
           fetch-depth: 1 # Use a shallow clone to speed up the checkout
           submodules: "none" # Disable fetching submodules
 
