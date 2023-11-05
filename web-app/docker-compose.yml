@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  frontend:
+    image: merchant
+    build:
+      context: .
+    env_file:
+      - .env
+    environment:
+      - PORT=3000
+      - NEXT_PUBLIC_VENDOR_ID=${NEXT_PUBLIC_VENDOR_ID}
+      - NEXT_PUBLIC_USER_ID=${NEXT_PUBLIC_USER_ID}
+      - NEXT_PUBLIC_DELIVER_ID=${NEXT_PUBLIC_DELIVER_ID}
+      - NEXT_PUBLIC_BACKEND_HOST=http://host.docker.internal:3001
+    ports:
+      - '3000:3000'
+    networks:
+      - internal
+
+networks:
+  internal:
+
+volumes:
+  data:
