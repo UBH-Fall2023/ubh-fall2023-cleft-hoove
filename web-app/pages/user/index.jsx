@@ -10,7 +10,7 @@ export default function UserHome() {
     const {items} = useList();
     
     return <Stack>
-        <Header />
+        <Header title="Food Order" />
         <FoodItems/>
         <Affix zIndex={20} position={{ bottom: 20, right: 40 }}>
             <ActionIcon component='a' href="/user/cart" size='md' style={

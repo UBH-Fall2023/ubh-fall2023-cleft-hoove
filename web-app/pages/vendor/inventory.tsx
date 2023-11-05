@@ -6,7 +6,7 @@ import { IconMapPin } from 'tabler-icons';
 export default function InventoryPage() {
   return (
     <Stack>
-      <Header />
+      <Header title="Food Vendor" />
       <Flex justify={'center'}>
         <Group>
           <IconMapPin />

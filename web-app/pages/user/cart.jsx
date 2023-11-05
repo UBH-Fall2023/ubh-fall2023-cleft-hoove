@@ -6,7 +6,7 @@ import CartItemList from '@/components/FoodItems/CartItem';
 export default function Cart() {
     const {storageItems} = useList();
     return <Stack>
-        <Header />
+        <Header title="Food Order" />
         <Flex pl={30}>
             <Text fw={700}>Cart</Text>
         </Flex>
