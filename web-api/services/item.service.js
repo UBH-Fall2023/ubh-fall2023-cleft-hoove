@@ -75,24 +75,45 @@ module.exports = {
 				vendorId: "string",
 				stock: {
 					type: "number",
-					convert: true,
 					positive: true,
+					convert: true,
 				},
 				price: {
 					type: "number",
-					convert: true,
 					positive: true,
+					convert: true,
 				},
 			},
 			async handler(ctx) {
+				console.log(ctx.params);
 				return this.adapter
 					.insert({
 						name: ctx.params.name,
 						vendorId: ctx.params.vendorId,
-						stock: ctx.params.stock,
-						price: ctx.params.price,
+						stock: +ctx.params.stock,
+						price: +ctx.params.price,
 					})
 					.then((doc) => this.transformDocuments(ctx, {}, doc));
+			},
+		},
+
+		getVendorItems: {
+			rest: {
+				path: "/vendor",
+				method: "GET",
+			},
+			params: {
+				vendorId: "string",
+			},
+			async handler(ctx) {
+				return this.adapter
+					.find({
+						query: {
+							vendorId: ctx.params.vendorId,
+						},
+						sort: ["-createdAt"],
+					})
+					.then((docs) => this.transformDocuments(ctx, {}, docs));
 			},
 		},
 
@@ -103,13 +124,13 @@ module.exports = {
 				id: "string",
 				stock: {
 					type: "number",
-					convert: true,
 					positive: true,
+					convert: true,
 				},
 				price: {
 					type: "number",
-					convert: true,
 					positive: true,
+					convert: true,
 				},
 			},
 			async handler(ctx) {
@@ -120,8 +141,8 @@ module.exports = {
 					.then((doc) => {
 						doc.name = ctx.params.name;
 						doc.vendorId = ctx.params.vendorId;
-						doc.stock = ctx.params.stock;
-						doc.price = ctx.params.price;
+						doc.stock = +ctx.params.stock;
+						doc.price = +ctx.params.price;
 						return this.adapter.updateById(doc._id, doc);
 					})
 					.then((doc) => this.transformDocuments(ctx, {}, doc));

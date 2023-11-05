@@ -6,6 +6,7 @@ import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
 import { theme } from '../theme';
 import { ListProvider } from '@/context/FoodCartContext';
+import { Notifications } from '@mantine/notifications';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -19,6 +20,7 @@ export default function App(props: AppProps) {
   const { Component, pageProps } = props;
   return (
     <MantineProvider theme={theme}>
+      <Notifications />
       <ListProvider>
         <Head>
           <title>Mantine Template</title>
