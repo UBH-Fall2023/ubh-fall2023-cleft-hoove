@@ -6,8 +6,7 @@ export interface FoodCardProps {
   name: string;
   price: number;
   stock: number;
-  id: string;
-  key: string;
+  _id: string;
   location: string;
 }
 
@@ -19,25 +18,25 @@ export const FoodCard = (props: FoodCardProps) => {
   };
 
   return (
-    <Card key={props.id} shadow="xs">
+    <Card key={props._id} shadow="xs">
       <Stack>
         <Group justify="space-between">
           <Text>{props.name}</Text>
           <Text>${props.price}</Text>
         </Group>
         <Group justify="space-between">
-          <Group>
+          {/* <Group>
             <IconMapPin></IconMapPin>
             <Text>{props.location}</Text>
-          </Group>
+          </Group> */}
           <Group>
             <Text c="dimmed">Stock:</Text>
             <Text>{props.stock}</Text>
           </Group>
+          <Flex justify={'end'}>
+            <Button onClick={onAddItem}>Add Item</Button>
+          </Flex>
         </Group>
-        <Flex justify={'end'}>
-          <Button onClick={onAddItem}>Add Item</Button>
-        </Flex>
       </Stack>
     </Card>
   );

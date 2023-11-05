@@ -16,7 +16,7 @@ const CartItemList = () => {
 };
 
 interface CartItemProps {
-  id: string;
+  _id: string;
   name: string;
   price: number;
   location: string;
@@ -24,18 +24,18 @@ interface CartItemProps {
 
 const CartItem = (props: CartItemProps) => {
   return (
-    <Card key={props.id} shadow="xs">
+    <Card key={props._id} shadow="xs">
       <Stack>
         <Group justify="space-between">
           <Text>{props.name}</Text>
           <Text>${props.price}</Text>
         </Group>
-        <Group justify="space-between">
+        {/* <Group justify="space-between">
           <Group>
             <IconMapPin></IconMapPin>
             <Text>{props.location}</Text>
           </Group>
-        </Group>
+        </Group> */}
       </Stack>
     </Card>
   );
