@@ -9,7 +9,7 @@ COPY package.json package-lock.json ./
 
 RUN npm install --production
 
-EXPOSE 9000
+EXPOSE 3001
 
 COPY . .
 
