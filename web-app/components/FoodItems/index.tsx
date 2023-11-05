@@ -6,6 +6,7 @@ const FoodItems = () => {
     {
       name: 'Chicken Rice',
       id: '1',
+      key: '1',
       price: 2,
       stock: 20,
       location: 'One World',
@@ -13,16 +14,18 @@ const FoodItems = () => {
     {
       name: 'Pizza',
       id: '2',
+      key: '2',
       price: 10,
       stock: 100,
       location: 'One World',
     },
   ];
-
   return (
     <Stack p={30}>
       <Flex>
-        <Text fw={700}>Order</Text>
+        <Text size="xl" fw={700}>
+          Order
+        </Text>
       </Flex>
       {ele.map((ele: FoodCardProps) => {
         return <FoodCard {...ele} />;

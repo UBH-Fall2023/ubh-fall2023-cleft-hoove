@@ -1,23 +1,28 @@
 import { useList } from '@/context/FoodCartContext';
-import { Button, Card, Flex, Group, Stack, Text } from '@mantine/core';
+import { Card, Stack, Group, Text } from '@mantine/core';
 import { IconMapPin } from 'tabler-icons';
 
-export interface FoodCardProps {
+const CartItemList = () => {
+  const { storageItems } = useList();
+  return (
+    <>
+      <Stack p={30}>
+        {storageItems.map((item: any) => {
+          return <CartItem {...item} />;
+        })}
+      </Stack>
+    </>
+  );
+};
+
+interface CartItemProps {
+  id: string;
   name: string;
   price: number;
-  stock: number;
-  id: string;
-  key: string;
   location: string;
 }
 
-export const FoodCard = (props: FoodCardProps) => {
-  const { addItem } = useList();
-
-  const onAddItem = () => {
-    addItem(props);
-  };
-
+const CartItem = (props: CartItemProps) => {
   return (
     <Card key={props.id} shadow="xs">
       <Stack>
@@ -30,15 +35,10 @@ export const FoodCard = (props: FoodCardProps) => {
             <IconMapPin></IconMapPin>
             <Text>{props.location}</Text>
           </Group>
-          <Group>
-            <Text c="dimmed">Stock:</Text>
-            <Text>{props.stock}</Text>
-          </Group>
         </Group>
-        <Flex justify={'end'}>
-          <Button onClick={onAddItem}>Add Item</Button>
-        </Flex>
       </Stack>
     </Card>
   );
 };
+
+export default CartItemList;
