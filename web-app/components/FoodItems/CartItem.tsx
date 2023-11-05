@@ -1,9 +1,13 @@
 import { useList } from '@/context/FoodCartContext';
 import { Card, Stack, Group, Text } from '@mantine/core';
-import { IconMapPin } from 'tabler-icons';
 
-const CartItemList = () => {
+interface CartItemListProps {
+  onPay?: any;
+}
+
+const CartItemList = ({ onPay }: CartItemListProps) => {
   const { storageItems } = useList();
+
   return (
     <>
       <Stack p={30}>

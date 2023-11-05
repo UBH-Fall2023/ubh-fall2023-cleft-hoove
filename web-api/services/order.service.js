@@ -134,6 +134,26 @@ module.exports = {
 			},
 		},
 
+		getUserOrders: {
+			rest: {
+				path: "/user",
+				method: "GET",
+			},
+			params: {
+				userId: "string",
+			},
+			async handler(ctx) {
+				return this.adapter
+					.find({
+						query: {
+							userId: ctx.params.userId,
+						},
+						sort: ["-createdAt"],
+					})
+					.then((docs) => this.transformDocuments(ctx, {}, docs));
+			},
+		},
+
 		getDeliverOrders: {
 			rest: {
 				path: "/deliver",

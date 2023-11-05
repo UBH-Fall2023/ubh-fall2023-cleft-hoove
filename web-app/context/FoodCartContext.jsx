@@ -16,7 +16,7 @@ const ListContext = createContext(initialState);
 const ListProvider = ({ children }) => {
 
   
-  const [items, setItems] = useSessionStorage({
+  const [items, setItems, removeItems] = useSessionStorage({
     key: 'cart-items',
     defaultValue: []
   });
@@ -31,7 +31,7 @@ const ListProvider = ({ children }) => {
   }
 
   return (
-    <ListContext.Provider value={{items:values, storageItems: items,  addItem: addItem}}>
+    <ListContext.Provider value={{items:values, storageItems: items, removeItems,  addItem: addItem}}>
       {children}
     </ListContext.Provider>
   );
