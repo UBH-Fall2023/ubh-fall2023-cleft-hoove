@@ -113,6 +113,27 @@ module.exports = {
 			},
 		},
 
+		getPickupOrders: {
+			rest: {
+				path: "/pickup",
+				method: "GET",
+			},
+			params: {
+				pickup: "string",
+			},
+			async handler(ctx) {
+				return this.adapter
+					.find({
+						query: {
+							pickup: ctx.params.pickup,
+							status: Status.Created,
+						},
+						sort: ["createdAt"],
+					})
+					.then((docs) => this.transformDocuments(ctx, {}, docs));
+			},
+		},
+
 		getDeliverOrders: {
 			rest: {
 				path: "/deliver",
@@ -125,7 +146,6 @@ module.exports = {
 				const deliver = await ctx.call("v1.user.get", {
 					id: ctx.params.deliverId,
 				});
-				console.log("deliver ", deliver);
 				return this.adapter
 					.find({
 						query: {
@@ -134,7 +154,29 @@ module.exports = {
 						},
 						sort: ["-createdAt"],
 					})
-					.then((docs) => this.transformDocuments(ctx, {}, docs));
+					.then((docs) => {
+						let m = new Map();
+						for (let order of docs) {
+							if (m.has(order.pickup)) {
+								m.set(order.pickup, {
+									count: m.get(order.pickup).count + 1,
+									location: order.pickup,
+									closingTime: order.closingTime,
+								});
+							} else {
+								m.set(order.pickup, {
+									count: 1,
+									location: order.pickup,
+									closingTime: order.closingTime,
+								});
+							}
+						}
+						let orders = [];
+						for (let order of m.values()) {
+							orders.push(order);
+						}
+						return orders;
+					});
 			},
 		},
 

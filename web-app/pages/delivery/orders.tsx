@@ -10,7 +10,7 @@ export default function OrdersPage() {
       <Flex justify={'left'}>
         <Space w="lg" />
         <Group>
-          <Title>Locations</Title>
+          <Title>Deliveries</Title>
         </Group>
       </Flex>
       <Orders />
